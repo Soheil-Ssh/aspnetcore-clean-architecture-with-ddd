@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CleanArch.Api/CleanArch.Api.csproj" Id="6fc8c519-570c-4c11-bcaf-0e0c7f35c6b5" />
+    <Project Path="src/CleanArch.Application/CleanArch.Application.csproj" Id="e70d57c7-fbd1-49a5-908e-ce71bdc95ad6" />
+    <Project Path="src/CleanArch.Domain/CleanArch.Domain.csproj" Id="0e79e2b1-03ba-4b6c-8652-d33ef6670d33" />
+    <Project Path="src/CleanArch.Infrastructure/CleanArch.Infrastructure.csproj" Id="102764f3-285c-4f28-b339-a960f60ffc48" />
+  </Folder>
+</Solution>
