@@ -1,0 +1,1 @@
+﻿global using CleanArch.Api.Contracts.Common;

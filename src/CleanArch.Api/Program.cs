@@ -1,3 +1,4 @@
+using CleanArch.Api.ExceptionHandling;
 using CleanArch.Application;
 using CleanArch.Infrastructure;
 
@@ -7,6 +8,9 @@ var configuration = builder.Configuration;
 
 services.AddInfrastructure(configuration);
 services.AddApplication();
+services.AddExceptionHandler<ValidationExceptionHandler>();
+services.AddExceptionHandler<GlobalExceptionHandler>();
+services.AddProblemDetails();
 services.AddControllers();
 services.AddOpenApi();
 
