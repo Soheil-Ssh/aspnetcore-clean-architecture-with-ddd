@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace CleanArch.Domain.Common.Result;
+﻿namespace CleanArch.Domain.Common.Result;
 
 /// <summary>
 /// Represents the outcome of an operation that either succeeds or fails, without a return value.
@@ -40,24 +38,27 @@ public class Result : BaseResult
 /// <typeparam name="TData">The type of data returned on success.</typeparam>
 public class Result<TData> : BaseResult
 {
+    private readonly TData? _data;
+
     private Result(TData? data, bool isSuccess, Error.Error error) : base(isSuccess, error)
     {
-        Data = data;
+        _data = data;
         IsSuccess = isSuccess;
     }
 
     /// <summary>
     /// Gets the data produced by a successful operation.
-    /// When <see cref="IsSuccess"/> is <c>true</c>, this value is guaranteed non‑null (enforced by
-    /// <see cref="System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"/>).
+    /// It is highly recommended to check <see cref="IsSuccess"/> before accessing this property.
     /// </summary>
-    public TData? Data { get; }
+    /// <exception cref="InvalidOperationException">Thrown when accessed on a failure result.</exception>
+    public TData Data => IsSuccess
+        ? _data!
+        : throw new InvalidOperationException("Cannot access data of a failed result.");
 
     /// <summary>
-    /// Indicates whether the operation succeeded. Overrides the base property to carry the
-    /// <see cref="MemberNotNullWhenAttribute"/> that makes <see cref="Data"/> non‑null after a <c>true</c> check.
+    /// Indicates whether the operation succeeded. 
+    /// When this property is <c>true</c>, the <see cref="Data"/> property can be safely accessed without causing an exception.
     /// </summary>
-    [MemberNotNullWhen(true, nameof(Data))]
     public override bool IsSuccess { get; }
 
     /// <summary>
