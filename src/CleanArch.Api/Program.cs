@@ -1,3 +1,4 @@
+using CleanArch.Application;
 using CleanArch.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,7 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 services.AddInfrastructure(configuration);
+services.AddApplication();
 services.AddControllers();
 services.AddOpenApi();
 
