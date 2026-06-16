@@ -1,9 +1,14 @@
-﻿using CleanArch.Domain.IRepositories.Book;
+﻿using CleanArch.Domain.Book.ValueObjects;
+using CleanArch.Domain.IRepositories.Book;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanArch.Infrastructure.Repositories.Book;
 
 public class BookRepository(ApplicationDbContext context) : IBookRepository
 {
+    public async Task<Domain.Book.Book?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        => await context.Books.FirstOrDefaultAsync(b => b.Id == new BookId(id), cancellationToken);
+
     public async Task AddAsync(Domain.Book.Book book, CancellationToken cancellationToken)
     {
         await context.Books.AddAsync(book, cancellationToken);

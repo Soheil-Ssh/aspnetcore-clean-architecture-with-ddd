@@ -14,6 +14,9 @@ public static class DependenciesContainer
         // add Fluent validation
         services.AddValidatorsFromAssembly(typeof(DependenciesContainer).Assembly);
 
+        // add mapster configs
+        TypeAdapterConfig.GlobalSettings.Scan(typeof(DependenciesContainer).Assembly);
+
         // add Validation behavior
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 

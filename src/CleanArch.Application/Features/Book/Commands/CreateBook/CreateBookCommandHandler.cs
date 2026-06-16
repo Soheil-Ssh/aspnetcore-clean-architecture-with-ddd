@@ -7,7 +7,7 @@ namespace CleanArch.Application.Features.Book.Commands.CreateBook;
 /// </summary>
 /// <param name="bookRepository"></param>
 /// <param name="unitOfWork"></param>
-public class CreateBookCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork): IRequestHandler<CreateBookCommand, Result<Guid>>
+public sealed class CreateBookCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork): IRequestHandler<CreateBookCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateBookCommand request, CancellationToken cancellationToken)
     {
