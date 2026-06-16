@@ -13,4 +13,9 @@ public class BookRepository(ApplicationDbContext context) : IBookRepository
     {
         await context.Books.AddAsync(book, cancellationToken);
     }
+
+    public void Update(Domain.Book.Book book)
+    {
+        context.Books.Update(book);
+    }
 }

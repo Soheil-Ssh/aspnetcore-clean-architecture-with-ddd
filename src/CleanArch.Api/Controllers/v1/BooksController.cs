@@ -1,6 +1,7 @@
 ﻿using CleanArch.Api.Contracts.Book.Requests;
 using CleanArch.Api.Contracts.Book.Responses;
 using CleanArch.Application.Features.Book.Commands.CreateBook;
+using CleanArch.Application.Features.Book.Commands.UpdateBook;
 using CleanArch.Application.Features.Book.Common;
 using CleanArch.Application.Features.Book.Queries.GetBookById;
 
@@ -34,6 +35,21 @@ public class BooksController(ISender sender) : BaseController
     public async Task<IActionResult> Create(CreateBookRequest request, CancellationToken ct)
     {
         var command = request.Adapt<CreateBookCommand>();
+        var result = await sender.Send(command, ct);
+        return result.ToActionResult();
+    }
+
+    /// <summary>
+    /// Put action for update book
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="request"></param>
+    /// <param name="ct"></param>
+    /// <returns></returns>
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateBookRequest request, CancellationToken ct)
+    {
+        var command = new UpdateBookCommand(id, request.Title, request.Author, request.Publisher, request.Isbn, request.PublishYear);
         var result = await sender.Send(command, ct);
         return result.ToActionResult();
     }
