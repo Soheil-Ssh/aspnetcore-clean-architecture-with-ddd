@@ -17,7 +17,7 @@ public abstract class BaseResult
     protected BaseResult(bool isSuccess, Error.Error error)
     {
         if ((isSuccess && error != Common.Error.Error.None) || (!isSuccess && error == Common.Error.Error.None))
-            throw new ArgumentException("Invalid error.", nameof(error));
+            throw new ArgumentException($"Invalid error. Is Success: {isSuccess.ToString()}, Error: [{Error?.Code}] {Error?.Description}", nameof(error));
 
         IsSuccess = isSuccess;
         Error = error;

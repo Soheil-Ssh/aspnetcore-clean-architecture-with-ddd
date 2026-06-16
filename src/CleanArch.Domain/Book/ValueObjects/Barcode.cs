@@ -21,7 +21,7 @@ public sealed record Barcode
 
         value = value.Trim().ToUpperInvariant();
 
-        if (Pattern.IsMatch(value))
+        if (!Pattern.IsMatch(value))
             return BarcodeErrors.InvalidFormat;
 
         return new Barcode(value);

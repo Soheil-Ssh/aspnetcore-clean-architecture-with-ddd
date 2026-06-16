@@ -80,7 +80,7 @@ public sealed class Book : AggregateRoot<BookId>
         return Result.Success();
     }
 
-    public Result AddCopy(Barcode barcode)
+    public Result<Guid> AddCopy(Barcode barcode)
     {
         if (_copies.Any(c => c.Barcode.Value == barcode.Value))
             return BookErrors.DuplicateBarcode;
@@ -89,8 +89,8 @@ public sealed class Book : AggregateRoot<BookId>
         if (copyResult.IsFailure)
             return copyResult.Error;
 
-        _copies.Add(copyResult.Data!);
-        return Result.Success();
+        _copies.Add(copyResult.Data);
+        return copyResult.Data.Id.Value;
     }
 
     public Result RemoveCopy(BookCopyId copyId)
