@@ -4,3 +4,6 @@ global using MediatR;
 global using CleanArch.Domain.Common.Error;
 global using CleanArch.Domain.Common.Result;
 global using Mapster;
+global using Microsoft.AspNetCore.Mvc;
+global using CleanArch.Api.Common.Extensions;
+global using Asp.Versioning;

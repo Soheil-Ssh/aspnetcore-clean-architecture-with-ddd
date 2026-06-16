@@ -1,5 +1,4 @@
 ﻿using MapsterMapper;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArch.Api.Common.Extensions;
 

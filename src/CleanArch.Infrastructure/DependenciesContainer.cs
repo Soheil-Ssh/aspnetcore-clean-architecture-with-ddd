@@ -1,4 +1,7 @@
-﻿using CleanArch.Infrastructure.Data;
+﻿using CleanArch.Domain.IRepositories.Book;
+using CleanArch.Domain.IRepositories.Common;
+using CleanArch.Infrastructure.Repositories.Book;
+using CleanArch.Infrastructure.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +16,12 @@ public static class DependenciesContainer
         services.AddDbContext<ApplicationDbContext>(options
             => options.UseSqlServer(configuration
                 .GetConnectionString("DefaultConnection")));
+
+        // Add unit of work
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        // Add repositories
+        services.AddScoped<IBookRepository, BookRepository>();
 
         return services;
     }
