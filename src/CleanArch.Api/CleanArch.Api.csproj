@@ -23,8 +23,4 @@
     <ProjectReference Include="..\CleanArch.Infrastructure\CleanArch.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contracts\Member\Responses\" />
-  </ItemGroup>
-
 </Project>

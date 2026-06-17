@@ -1,7 +1,10 @@
 ﻿using CleanArch.Api.Contracts.Member.Requests;
+using CleanArch.Api.Contracts.Member.Responses;
 using CleanArch.Application.Features.Member.Commands.BlockMember;
 using CleanArch.Application.Features.Member.Commands.CreateMember;
 using CleanArch.Application.Features.Member.Commands.UnblockMember;
+using CleanArch.Application.Features.Member.Common;
+using CleanArch.Application.Features.Member.Queries.GetMemberById;
 
 namespace CleanArch.Api.Controllers.v1;
 
@@ -9,6 +12,20 @@ namespace CleanArch.Api.Controllers.v1;
 [Route("api/v{v:apiVersion}/[controller]")]
 public class MembersController(ISender sender) : BaseController
 {
+    /// <summary>
+    /// Get action for get member by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="ct"></param>
+    /// <returns></returns>
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
+    {
+        var query = new GetMemberByIdQuery(id);
+        var result = await sender.Send(query, ct);
+        return result.ToActionResult<MemberDto, GetMemberByIdResponse>();
+    }
+
     /// <summary>
     /// Post action for create member
     /// </summary>
