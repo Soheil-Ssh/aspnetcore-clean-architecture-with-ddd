@@ -1,5 +1,4 @@
-﻿using CleanArch.Domain.IRepositories.Member;
-using CleanArch.Domain.Member.Errors;
+﻿using CleanArch.Domain.Member.Errors;
 using CleanArch.Domain.Member.ValueObjects;
 
 namespace CleanArch.Application.Features.Member.Commands.CreateMember;

@@ -1,5 +1,4 @@
-﻿using CleanArch.Domain.IRepositories.Member;
-using CleanArch.Domain.Member.Errors;
+﻿using CleanArch.Domain.Member.Errors;
 
 namespace CleanArch.Application.Features.Member.Commands.UnblockMember;
 
