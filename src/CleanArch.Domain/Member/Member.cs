@@ -1,4 +1,5 @@
-﻿using CleanArch.Domain.Member.ValueObjects;
+﻿using CleanArch.Domain.Member.Errors;
+using CleanArch.Domain.Member.ValueObjects;
 
 namespace CleanArch.Domain.Member;
 
@@ -27,5 +28,21 @@ public sealed class Member : AggregateRoot<MemberId>
         Email email)
     {
         return new Member(MemberId.New(), fullName, email);
+    }
+
+    public Result Block()
+    {
+        if (IsBlocked) return MemberErrors.AlreadyBlocked;
+
+        IsBlocked = true;
+        return Result.Success();
+    }
+
+    public Result Unblock()
+    {
+        if (!IsBlocked) return MemberErrors.NotBlocked;
+
+        IsBlocked = false;
+        return Result.Success();
     }
 }
