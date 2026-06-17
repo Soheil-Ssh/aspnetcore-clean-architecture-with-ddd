@@ -1,4 +1,4 @@
-﻿namespace CleanArch.Domain.IRepositories.Common;
+﻿namespace CleanArch.Domain.IRepositories;
 
 public interface IUnitOfWork
 {

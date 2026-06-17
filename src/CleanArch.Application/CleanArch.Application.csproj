@@ -17,8 +17,4 @@
     <ProjectReference Include="..\CleanArch.Domain\CleanArch.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Member\Queries\" />
-  </ItemGroup>
-
 </Project>

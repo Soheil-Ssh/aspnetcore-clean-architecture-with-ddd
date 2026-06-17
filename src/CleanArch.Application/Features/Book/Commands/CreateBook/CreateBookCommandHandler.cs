@@ -1,13 +1,14 @@
 ﻿using CleanArch.Domain.Book.ValueObjects;
+using CleanArch.Domain.IRepositories;
 
 namespace CleanArch.Application.Features.Book.Commands.CreateBook;
 
 /// <summary>
 /// Create book command handler
 /// </summary>
-/// <param name="bookRepository"></param>
+/// <param name="bookCommandRepository"></param>
 /// <param name="unitOfWork"></param>
-public sealed class CreateBookCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork): IRequestHandler<CreateBookCommand, Result<Guid>>
+public sealed class CreateBookCommandHandler(IBookRepository bookCommandRepository, IUnitOfWork unitOfWork): IRequestHandler<CreateBookCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateBookCommand request, CancellationToken cancellationToken)
     {
@@ -25,7 +26,7 @@ public sealed class CreateBookCommandHandler(IBookRepository bookRepository, IUn
         if (bookResult.IsFailure) return bookResult.Error;
 
 
-        await bookRepository.AddAsync(bookResult.Data, cancellationToken);
+        await bookCommandRepository.AddAsync(bookResult.Data, cancellationToken);
         await unitOfWork.SaveAsync(cancellationToken);
 
         return bookResult.Data.Id.Value;

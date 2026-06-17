@@ -1,9 +1,8 @@
-﻿using CleanArch.Domain.IRepositories.Book;
-using CleanArch.Domain.IRepositories.Common;
-using CleanArch.Domain.IRepositories.Member;
-using CleanArch.Infrastructure.Repositories.Book;
-using CleanArch.Infrastructure.Repositories.Common;
-using CleanArch.Infrastructure.Repositories.Member;
+﻿using CleanArch.Application.IQueries;
+using CleanArch.Domain.Book;
+using CleanArch.Domain.IRepositories;
+using CleanArch.Infrastructure.Queries;
+using CleanArch.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +22,12 @@ public static class DependenciesContainer
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Add repositories
-        services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IBookRepository, BookCommandRepository>();
         services.AddScoped<IMemberRepository, MemberRepository>();
+
+        // Add queries
+        services.AddScoped<IBookQueries, BookQueries>();
+        services.AddScoped<IMemberQueries, MemberQueries>();
 
         return services;
     }

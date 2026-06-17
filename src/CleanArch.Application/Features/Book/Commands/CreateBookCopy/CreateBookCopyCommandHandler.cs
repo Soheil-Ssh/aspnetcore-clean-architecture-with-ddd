@@ -1,19 +1,20 @@
 ﻿using CleanArch.Domain.Book.Errors;
 using CleanArch.Domain.Book.ValueObjects;
+using CleanArch.Domain.IRepositories;
 
 namespace CleanArch.Application.Features.Book.Commands.CreateBookCopy;
 
 /// <summary>
 /// Create book copy command
 /// </summary>
-/// <param name="bookRepository"></param>
+/// <param name="bookCommandRepository"></param>
 /// <param name="unitOfWork"></param>
-public sealed class CreateBookCopyCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork)
+public sealed class CreateBookCopyCommandHandler(IBookRepository bookCommandRepository, IUnitOfWork unitOfWork)
     : IRequestHandler<CreateBookCopyCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateBookCopyCommand request, CancellationToken cancellationToken)
     {
-        var book = await bookRepository.GetByIdAsync(request.BookId, cancellationToken);
+        var book = await bookCommandRepository.GetByIdAsync(request.BookId, cancellationToken);
         if (book is null) return BookErrors.NotFoundById;
 
         var barcodeResult = Barcode.Create(request.Barcode);

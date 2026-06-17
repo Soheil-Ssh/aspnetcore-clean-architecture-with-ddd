@@ -5,6 +5,6 @@ public record BookDto(Guid Id,
     string Author,
     string Publisher,
     string Isbn,
-    string PublisherYear,
+    int PublisherYear,
     DateTime CreateAt,
-    DateTime UpdateAt);
+    DateTime? UpdateAt);

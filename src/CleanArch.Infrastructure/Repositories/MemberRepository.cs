@@ -1,8 +1,6 @@
-﻿using CleanArch.Domain.IRepositories.Member;
-using CleanArch.Domain.Member.ValueObjects;
-using Microsoft.EntityFrameworkCore;
+﻿using CleanArch.Domain.Member.ValueObjects;
 
-namespace CleanArch.Infrastructure.Repositories.Member;
+namespace CleanArch.Infrastructure.Repositories;
 
 public class MemberRepository(ApplicationDbContext context) : IMemberRepository
 {

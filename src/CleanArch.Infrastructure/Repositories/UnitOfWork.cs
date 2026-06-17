@@ -1,6 +1,6 @@
-﻿using CleanArch.Domain.IRepositories.Common;
+﻿using CleanArch.Domain.IRepositories;
 
-namespace CleanArch.Infrastructure.Repositories.Common;
+namespace CleanArch.Infrastructure.Repositories;
 
 public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 {
