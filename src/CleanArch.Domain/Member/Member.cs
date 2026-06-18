@@ -24,10 +24,16 @@ public sealed class Member : AggregateRoot<MemberId>
         MaxLoanCount = 5;
     }
 
-    public static Result<Member> Create(FullName fullName,
-        Email email)
+    public static Result<Member> Create(FullName fullName, Email email)
+        => new Member(MemberId.New(), fullName, email);
+
+    public Result Update(FullName fullName, Email email)
     {
-        return new Member(MemberId.New(), fullName, email);
+        FullName = fullName;
+        Email = email;
+        UpdatedAt = DateTime.UtcNow;
+
+        return Result.Success();
     }
 
     public Result Block()

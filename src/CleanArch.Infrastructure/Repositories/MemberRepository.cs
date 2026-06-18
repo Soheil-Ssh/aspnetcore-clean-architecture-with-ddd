@@ -14,4 +14,7 @@ public class MemberRepository(ApplicationDbContext context) : IMemberRepository
 
     public async Task<bool> IsExistByEmailAsync(string email, CancellationToken cancellationToken)
         => await context.Members.AnyAsync(m => m.Email.Value == email, cancellationToken);
+
+    public async Task<bool> IsExistByEmailAsync(Guid id, string email, CancellationToken cancellationToken)
+        => await context.Members.AnyAsync(m => m.Id != new MemberId(id) && m.Email.Value == email, cancellationToken);
 }

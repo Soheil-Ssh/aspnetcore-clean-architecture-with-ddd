@@ -3,6 +3,7 @@ using CleanArch.Api.Contracts.Member.Responses;
 using CleanArch.Application.Features.Member.Commands.BlockMember;
 using CleanArch.Application.Features.Member.Commands.CreateMember;
 using CleanArch.Application.Features.Member.Commands.UnblockMember;
+using CleanArch.Application.Features.Member.Commands.UpdateMember;
 using CleanArch.Application.Features.Member.Common;
 using CleanArch.Application.Features.Member.Queries.GetMemberById;
 
@@ -36,6 +37,22 @@ public class MembersController(ISender sender) : BaseController
     public async Task<IActionResult> Create(CreateMemberRequest request, CancellationToken ct)
     {
         var command = request.Adapt<CreateMemberCommand>();
+        var result = await sender.Send(command, ct);
+        return result.ToActionResult();
+    }
+
+
+    /// <summary>
+    /// Put action for update member
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="request"></param>
+    /// <param name="ct"></param>
+    /// <returns></returns>
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMemberRequest request, CancellationToken ct)
+    {
+        var command = new UpdateMemberCommand(id, request.FirstName, request.LastName, request.Email);
         var result = await sender.Send(command, ct);
         return result.ToActionResult();
     }
