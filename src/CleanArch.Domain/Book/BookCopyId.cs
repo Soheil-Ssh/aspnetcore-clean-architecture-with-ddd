@@ -1,4 +1,4 @@
-﻿namespace CleanArch.Domain.Book.ValueObjects;
+﻿namespace CleanArch.Domain.Book;
 
 public sealed record BookCopyId(Guid Value)
 {

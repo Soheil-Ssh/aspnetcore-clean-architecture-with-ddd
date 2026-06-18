@@ -1,7 +1,6 @@
-﻿using CleanArch.Domain.Book.ValueObjects;
+﻿using CleanArch.Domain.Book;
 using CleanArch.Domain.Loan;
-using CleanArch.Domain.Loan.ValueObjects;
-using CleanArch.Domain.Member.ValueObjects;
+using CleanArch.Domain.Member;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CleanArch.Infrastructure.Data.Configurations;

@@ -1,4 +1,4 @@
-﻿using CleanArch.Domain.Member.ValueObjects;
+﻿using CleanArch.Domain.Member;
 
 namespace CleanArch.Infrastructure.Repositories;
 

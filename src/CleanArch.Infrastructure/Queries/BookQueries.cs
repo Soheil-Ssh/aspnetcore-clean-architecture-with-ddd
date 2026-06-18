@@ -1,6 +1,6 @@
 ﻿using CleanArch.Application.Features.Book.Common;
 using CleanArch.Application.IQueries;
-using CleanArch.Domain.Book.ValueObjects;
+using CleanArch.Domain.Book;
 
 namespace CleanArch.Infrastructure.Queries;
 

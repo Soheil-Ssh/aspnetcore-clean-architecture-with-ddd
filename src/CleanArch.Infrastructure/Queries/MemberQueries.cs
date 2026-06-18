@@ -1,6 +1,6 @@
 ﻿using CleanArch.Application.Features.Member.Common;
 using CleanArch.Application.IQueries;
-using CleanArch.Domain.Member.ValueObjects;
+using CleanArch.Domain.Member;
 
 namespace CleanArch.Infrastructure.Queries;
 

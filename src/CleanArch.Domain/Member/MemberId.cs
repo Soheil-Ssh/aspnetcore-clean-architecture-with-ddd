@@ -1,4 +1,4 @@
-﻿namespace CleanArch.Domain.Member.ValueObjects;
+﻿namespace CleanArch.Domain.Member;
 
 public sealed record MemberId(Guid Value)
 {

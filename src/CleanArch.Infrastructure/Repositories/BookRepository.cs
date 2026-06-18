@@ -1,4 +1,4 @@
-﻿using CleanArch.Domain.Book.ValueObjects;
+﻿using CleanArch.Domain.Book;
 
 namespace CleanArch.Infrastructure.Repositories;
 
