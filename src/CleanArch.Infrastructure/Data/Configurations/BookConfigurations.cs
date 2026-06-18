@@ -1,6 +1,5 @@
 ﻿using CleanArch.Domain.Book;
 using CleanArch.Domain.Book.ValueObjects;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CleanArch.Infrastructure.Data.Configurations;
@@ -64,5 +63,11 @@ public class BookConfigurations : IEntityTypeConfiguration<Book>
             });
 
         });
+
+        // Create at
+        builder.Property(x => x.CreatedAt).IsRequired();
+
+        // Update at
+        builder.Property(x => x.UpdatedAt);
     }
 }

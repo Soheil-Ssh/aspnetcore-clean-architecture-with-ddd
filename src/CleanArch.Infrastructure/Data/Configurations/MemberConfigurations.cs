@@ -1,6 +1,5 @@
 ﻿using CleanArch.Domain.Member;
 using CleanArch.Domain.Member.ValueObjects;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CleanArch.Infrastructure.Data.Configurations;
@@ -36,5 +35,11 @@ public class MemberConfigurations : IEntityTypeConfiguration<Member>
 
         // Max loan count
         builder.Property(x => x.MaxLoanCount).IsRequired();
+
+        // Create at
+        builder.Property(x => x.CreatedAt).IsRequired();
+
+        // Update at
+        builder.Property(x => x.UpdatedAt);
     }
 }
