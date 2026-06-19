@@ -1,6 +1,6 @@
-﻿using CleanArch.Domain.Book.ValueObjects;
-using CleanArch.Domain.Loan.ValueObjects;
-using CleanArch.Domain.Member.ValueObjects;
+﻿using CleanArch.Domain.Book;
+using CleanArch.Domain.Loan.Events;
+using CleanArch.Domain.Member;
 
 namespace CleanArch.Domain.Loan;
 
@@ -29,5 +29,17 @@ public sealed class Loan : AggregateRoot<LoanId>
         BorrowedAt = borrowedAt;
         DueDate = dueDate;
         RenewalCount = 0;
+    }
+
+    public static Result<Loan> Create(MemberId memberId, BookId bookId, BookCopyId bookCopyId)
+    {
+        var loan = new Loan(LoanId.New(),
+            memberId,
+            bookCopyId,
+            DateTime.UtcNow,
+            DateTime.UtcNow.AddDays(LoanRules.LoanPeriodDays));
+
+        loan.AddDomainEvent(new LoanCreatedDomainEvent(loan.Id, memberId, bookId, bookCopyId));
+        return loan;
     }
 }

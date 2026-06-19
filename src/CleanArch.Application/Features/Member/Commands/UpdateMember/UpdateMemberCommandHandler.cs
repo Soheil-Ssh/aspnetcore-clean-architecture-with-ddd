@@ -1,5 +1,4 @@
-﻿using CleanArch.Domain.Member.Errors;
-using CleanArch.Domain.Member.ValueObjects;
+﻿using CleanArch.Domain.Member.ValueObjects;
 
 namespace CleanArch.Application.Features.Member.Commands.UpdateMember;
 
@@ -13,13 +12,13 @@ public sealed class UpdateMemberCommandHandler(IMemberRepository memberRepositor
 {
     public async Task<Result> Handle(UpdateMemberCommand request, CancellationToken cancellationToken)
     {
-        var member = await memberRepository.GetByIdAsync(request.Id, cancellationToken);
+        var member = await memberRepository.GetByIdAsync(new MemberId(request.Id), cancellationToken);
         if (member is null) return MemberErrors.NotFoundById;
 
         var emailResult = Email.Create(request.Email);
         if (emailResult.IsFailure) return emailResult.Error;
 
-        var isExistByEmail = await memberRepository.IsExistByEmailAsync(request.Id, emailResult.Data.Value, cancellationToken);
+        var isExistByEmail = await memberRepository.IsExistByEmailAsync(new MemberId(request.Id), emailResult.Data.Value, cancellationToken);
         if (isExistByEmail) return MemberErrors.DuplicateEmail;
 
         var fullNameResult = FullName.Create(request.FirstName, request.LastName);

@@ -13,7 +13,7 @@ public class UpdateBookCommandHandler(IBookRepository bookCommandRepository, IUn
 {
     public async Task<Result> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
     {
-        var book = await bookCommandRepository.GetByIdAsync(request.Id, cancellationToken);
+        var book = await bookCommandRepository.GetByIdAsync(new BookId(request.Id), cancellationToken);
         if (book is null) return BookErrors.NotFoundById;
 
         var isbnResult = Isbn.Create(request.Isbn);

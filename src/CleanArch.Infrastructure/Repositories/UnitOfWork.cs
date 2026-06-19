@@ -1,9 +1,22 @@
-﻿using CleanArch.Domain.IRepositories;
+﻿using CleanArch.Domain.Abstractions;
+using MediatR;
 
 namespace CleanArch.Infrastructure.Repositories;
 
-public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
+public class UnitOfWork(ApplicationDbContext context, IMediator mediator) : IUnitOfWork
 {
-    public Task<int> SaveAsync(CancellationToken cancellationToken = default)
-        => context.SaveChangesAsync(cancellationToken);
+    public async Task SaveAsync(CancellationToken cancellationToken = default)
+    {
+        var events = context.ChangeTracker
+            .Entries<IHasDomainEvents>()
+            .SelectMany(x => x.Entity.PopDomainEvents())
+            .ToList();
+
+        foreach (var domainEvent in events)
+        {
+            await mediator.Publish(domainEvent, cancellationToken);
+        }
+
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }

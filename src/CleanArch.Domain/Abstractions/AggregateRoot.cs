@@ -1,6 +1,6 @@
 ﻿namespace CleanArch.Domain.Abstractions;
 
-public class AggregateRoot<TKey> : Entity<TKey> where TKey : notnull
+public class AggregateRoot<TKey> : Entity<TKey>, IHasDomainEvents where TKey : notnull
 {
     private readonly List<IDomainEvent> _domainEvents = [];
 

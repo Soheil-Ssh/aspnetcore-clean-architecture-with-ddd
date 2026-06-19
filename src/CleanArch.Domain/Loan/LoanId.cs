@@ -1,4 +1,4 @@
-﻿namespace CleanArch.Domain.Loan.ValueObjects;
+﻿namespace CleanArch.Domain.Loan;
 
 public sealed record LoanId(Guid Value)
 {

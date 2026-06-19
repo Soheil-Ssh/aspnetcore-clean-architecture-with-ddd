@@ -1,19 +1,17 @@
-﻿using CleanArch.Domain.Book;
-
-namespace CleanArch.Infrastructure.Repositories;
+﻿namespace CleanArch.Infrastructure.Repositories;
 
 public class BookCommandRepository(ApplicationDbContext context) : IBookRepository
 {
-    public async Task<Domain.Book.Book?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Book?> GetByIdAsync(BookId id, CancellationToken cancellationToken = default)
         => await context.Books.Include(b => b.Copies)
-            .FirstOrDefaultAsync(b => b.Id == new BookId(id), cancellationToken);
+            .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
-    public async Task AddAsync(Domain.Book.Book book, CancellationToken cancellationToken = default)
+    public async Task AddAsync(Book book, CancellationToken cancellationToken = default)
     {
         await context.Books.AddAsync(book, cancellationToken);
     }
 
-    public void Update(Domain.Book.Book book)
+    public void Update(Book book)
     {
         context.Books.Update(book);
     }

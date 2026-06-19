@@ -9,7 +9,6 @@ using CleanArch.Application.Features.Book.Queries.GetBookById;
 namespace CleanArch.Api.Controllers.v1;
 
 [ApiVersion(1)]
-[Route("api/v{v:apiVersion}/[controller]")]
 public class BooksController(ISender sender) : BaseController
 {
     /// <summary>

@@ -12,7 +12,7 @@ public class BlockMemberCommandHandler(IMemberRepository memberRepository, IUnit
 {
     public async Task<Result> Handle(BlockMemberCommand request, CancellationToken cancellationToken)
     {
-        var member = await memberRepository.GetByIdAsync(request.Id, cancellationToken);
+        var member = await memberRepository.GetByIdAsync(new MemberId(request.Id), cancellationToken);
         if (member is null) return MemberErrors.NotFoundById;
 
         var blockResult = member.Block();

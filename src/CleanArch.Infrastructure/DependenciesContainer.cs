@@ -1,9 +1,6 @@
 ﻿using CleanArch.Application.IQueries;
-using CleanArch.Domain.Book;
-using CleanArch.Domain.IRepositories;
 using CleanArch.Infrastructure.Queries;
 using CleanArch.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +21,7 @@ public static class DependenciesContainer
         // Add repositories
         services.AddScoped<IBookRepository, BookCommandRepository>();
         services.AddScoped<IMemberRepository, MemberRepository>();
+        services.AddScoped<ILoanRepository, LoanRepository>();
 
         // Add queries
         services.AddScoped<IBookQueries, BookQueries>();
