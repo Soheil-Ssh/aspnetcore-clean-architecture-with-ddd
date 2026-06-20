@@ -1,6 +1,6 @@
 ﻿namespace CleanArch.Api.Contracts.Book.Responses;
 
-public record GetBookByIdResponse(Guid Id,
+public record GetBooksResponse(Guid Id,
     string Title,
     string Author,
     string Publisher,

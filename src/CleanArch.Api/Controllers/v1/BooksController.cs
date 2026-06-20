@@ -1,16 +1,32 @@
 ﻿using CleanArch.Api.Contracts.Book.Requests;
 using CleanArch.Api.Contracts.Book.Responses;
+using CleanArch.Application.Common.Pagination;
 using CleanArch.Application.Features.Book.Commands.CreateBook;
 using CleanArch.Application.Features.Book.Commands.CreateBookCopy;
 using CleanArch.Application.Features.Book.Commands.UpdateBook;
 using CleanArch.Application.Features.Book.Common;
 using CleanArch.Application.Features.Book.Queries.GetBookById;
+using CleanArch.Application.Features.Book.Queries.GetBooks;
 
 namespace CleanArch.Api.Controllers.v1;
 
 [ApiVersion(1)]
 public class BooksController(ISender sender) : BaseController
 {
+    /// <summary>
+    /// Get action for get all books with filter
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="ct"></param>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] GetBooksRequest request, CancellationToken ct)
+    {
+        var query = new GetBooksQuery(request.Adapt<GetBooksFilterDto>());
+        var result = await sender.Send(query, ct);
+        return result.ToActionResult<PagedResult<BookDto>, PagedResult<GetBooksResponse>>();
+    }
+
     /// <summary>
     /// Get action for get book by id
     /// </summary>

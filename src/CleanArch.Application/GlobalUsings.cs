@@ -9,3 +9,4 @@ global using CleanArch.Domain.Member;
 global using CleanArch.Domain.Book.Errors;
 global using CleanArch.Domain.Member.Errors;
 global using CleanArch.Domain.Loan.Errors;
+global using CleanArch.Application.Common.Pagination;
