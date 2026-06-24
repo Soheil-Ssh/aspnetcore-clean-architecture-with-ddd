@@ -1,6 +1,6 @@
 ﻿namespace CleanArch.Domain.Abstractions;
 
-public class AggregateRoot<TKey> : Entity<TKey>, IHasDomainEvents where TKey : notnull
+public abstract class AggregateRoot<TKey> : Entity<TKey>, IAggregateRoot where TKey : notnull
 {
     private readonly List<IDomainEvent> _domainEvents = [];
 
@@ -12,22 +12,15 @@ public class AggregateRoot<TKey> : Entity<TKey>, IHasDomainEvents where TKey : n
     public IReadOnlyCollection<IDomainEvent> DomainEvents =>
         _domainEvents.AsReadOnly();
 
-    protected void AddDomainEvent(IDomainEvent domainEvent)
-    {
-        _domainEvents.Add(domainEvent);
-    }
-
     public IReadOnlyList<IDomainEvent> PopDomainEvents()
     {
         var events = _domainEvents.ToList();
-
         _domainEvents.Clear();
-
         return events;
     }
 
-    public void ClearDomainEvents()
+    protected void AddDomainEvent(IDomainEvent domainEvent)
     {
-        _domainEvents.Clear();
+        _domainEvents.Add(domainEvent);
     }
 }

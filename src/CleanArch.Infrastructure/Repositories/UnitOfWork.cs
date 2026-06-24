@@ -8,7 +8,7 @@ public class UnitOfWork(ApplicationDbContext context, IMediator mediator) : IUni
     public async Task SaveAsync(CancellationToken cancellationToken = default)
     {
         var events = context.ChangeTracker
-            .Entries<IHasDomainEvents>()
+            .Entries<IAggregateRoot>()
             .SelectMany(x => x.Entity.PopDomainEvents())
             .ToList();
 
