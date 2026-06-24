@@ -31,7 +31,6 @@ public sealed class Member : AggregateRoot<MemberId>
     {
         FullName = fullName;
         Email = email;
-        UpdatedAt = DateTime.UtcNow;
 
         return Result.Success();
     }

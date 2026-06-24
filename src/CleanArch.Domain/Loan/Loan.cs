@@ -1,6 +1,4 @@
-﻿using CleanArch.Domain.Book;
-using CleanArch.Domain.Loan.Events;
-using CleanArch.Domain.Member;
+﻿using CleanArch.Domain.Loan.Events;
 
 namespace CleanArch.Domain.Loan;
 

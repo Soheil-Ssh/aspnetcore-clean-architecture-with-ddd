@@ -75,7 +75,6 @@ public sealed class Book : AggregateRoot<BookId>
         Publisher = publisher;
         Isbn = isbn;
         PublishYear = publishYear;
-        UpdatedAt = DateTime.UtcNow;
 
         return Result.Success();
     }

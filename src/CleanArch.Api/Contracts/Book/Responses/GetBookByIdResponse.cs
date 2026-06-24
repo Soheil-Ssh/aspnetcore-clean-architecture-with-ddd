@@ -7,4 +7,4 @@ public record GetBookByIdResponse(Guid Id,
     string Isbn,
     string PublisherYear,
     DateTime CreateAt,
-    DateTime? UpdateAt);
+    DateTime UpdateAt);

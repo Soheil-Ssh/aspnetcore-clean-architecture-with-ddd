@@ -43,7 +43,7 @@ public class LoanConfigurations : IEntityTypeConfiguration<Loan>
         builder.Property(x => x.CreatedAt).IsRequired();
 
         // Update at
-        builder.Property(x => x.UpdatedAt);
+        builder.Property(x => x.UpdatedAt).IsRequired();
 
         // Ignore is returned (computed)
         builder.Ignore(x => x.IsReturned);

@@ -1,6 +1,8 @@
 ﻿using CleanArch.Application.IQueries;
+using CleanArch.Infrastructure.Data.Interceptors;
 using CleanArch.Infrastructure.Queries;
 using CleanArch.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,10 +12,15 @@ public static class DependenciesContainer
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        // Add interceptors
+        services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+
         // Add context
-        services.AddDbContext<ApplicationDbContext>(options
-            => options.UseSqlServer(configuration
-                .GetConnectionString("DefaultConnection")));
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        {
+            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+        });
 
         // Add unit of work
         services.AddScoped<IUnitOfWork, UnitOfWork>();

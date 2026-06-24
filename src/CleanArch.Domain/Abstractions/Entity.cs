@@ -1,23 +1,17 @@
 ﻿namespace CleanArch.Domain.Abstractions;
 
-public abstract class Entity<TKey>
+public abstract class Entity<TKey> : IEntity
 {
     public TKey Id { get; } = default!;
     public DateTime CreatedAt { get; protected set; }
-    public DateTime? UpdatedAt { get; protected set; }
+    public DateTime UpdatedAt { get; protected set; }
 
     protected Entity(TKey id)
     {
         Id = id;
-        CreatedAt = DateTime.UtcNow;
     }
 
     protected Entity() { }
-
-    protected void SetUpdated()
-    {
-        UpdatedAt = DateTime.UtcNow;
-    }
 
     public override bool Equals(object? obj)
     {

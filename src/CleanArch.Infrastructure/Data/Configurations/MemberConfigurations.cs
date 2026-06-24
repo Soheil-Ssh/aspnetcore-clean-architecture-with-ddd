@@ -38,6 +38,6 @@ public class MemberConfigurations : IEntityTypeConfiguration<Member>
         builder.Property(x => x.CreatedAt).IsRequired();
 
         // Update at
-        builder.Property(x => x.UpdatedAt);
+        builder.Property(x => x.UpdatedAt).IsRequired();
     }
 }

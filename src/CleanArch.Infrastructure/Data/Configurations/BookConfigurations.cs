@@ -68,6 +68,6 @@ public class BookConfigurations : IEntityTypeConfiguration<Book>
         builder.Property(x => x.CreatedAt).IsRequired();
 
         // Update at
-        builder.Property(x => x.UpdatedAt);
+        builder.Property(x => x.UpdatedAt).IsRequired();
     }
 }

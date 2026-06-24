@@ -6,4 +6,4 @@ public sealed record GetMemberByIdResponse(Guid Id,
     bool IsBlocked,
     int MaxLoanCount,
     DateTime CreateAt,
-    DateTime? UpdateAt);
+    DateTime UpdateAt);
