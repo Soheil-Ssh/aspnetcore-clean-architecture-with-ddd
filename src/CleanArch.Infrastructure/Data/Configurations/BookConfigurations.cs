@@ -26,13 +26,13 @@ public class BookConfigurations : IEntityTypeConfiguration<Book>
         builder.Property(x => x.Publisher).HasMaxLength(200).IsRequired();
 
         // Isbn
-        builder.OwnsOne(x => x.Isbn, isbn =>
+        builder.ComplexProperty(x => x.Isbn, isbn =>
         {
             isbn.Property(x => x.Value).HasColumnName("Isbn").HasMaxLength(20).IsRequired();
         });
 
         // Publisher year
-        builder.OwnsOne(x => x.PublishYear, year =>
+        builder.ComplexProperty(x => x.PublishYear, year =>
         {
             year.Property(x => x.Value).HasColumnName("PublishYear").IsRequired();
         });

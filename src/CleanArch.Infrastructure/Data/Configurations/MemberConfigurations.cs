@@ -1,6 +1,4 @@
-﻿using CleanArch.Domain.Member;
-using CleanArch.Domain.Member.ValueObjects;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CleanArch.Infrastructure.Data.Configurations;
 
@@ -17,7 +15,7 @@ public class MemberConfigurations : IEntityTypeConfiguration<Member>
             .HasConversion(id => id.Value, value => new MemberId(value));
 
         // Full name
-        builder.OwnsOne(x => x.FullName, fullName =>
+        builder.ComplexProperty(x => x.FullName, fullName =>
         {
             fullName.Property(x => x.FirstName).HasColumnName("FirstName").HasMaxLength(100).IsRequired();
             fullName.Property(x => x.LastName).HasColumnName("LastName").HasMaxLength(100).IsRequired();
